@@ -13,7 +13,7 @@ const app = express();
 // interface web
 app.use('/app', express.static(path.join(__dirname, 'view')));
 
-// Middleware para analisar JSON
+// Middleware para analisar JSON - verifica se o conteúdo da requisição está em JSON. Se estiver, ele faz o "parse" desse JSON para um objeto JavaScript,
 app.use(express.json());
 
 // Credenciais do banco de dados
@@ -40,20 +40,31 @@ connection.connect((err) => {
   console.log('Conectado ao MySQL com sucesso!');
 });
 
-// Configurando Swagger
+// configura o Swagger no aplicativo Express.js 
 app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
+// middleware chamado checkToken
 // Middleware de verificação de token
+// responsável por verificar a presença e a validade de um token JWT (JSON Web Token) em uma requisição
 function checkToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
 
+  // Extrai o cabeçalho HTTP de autorização da requisição. Esse cabeçalho contém o token JWT.
+  const authHeader = req.headers['authorization'];
+
+
+  const token = authHeader && authHeader.split(' ')[1];
+  //authHeader.split(' ')[1]: O token é o segundo item após o "Bearer" no cabeçalho.Se o cabeçalho não existir, token será undefined
+
+  //se authorization existir, a linha faz o split para separar o token da palavra-chave Bearer
   if (!token) {
     return res.status(401).json({ msg: 'Acesso negado!' });
   }
 
   try {
+    // Tenta verificar e decodificar o token usando a chave secreta armazenada em process.env.JWT_SECRET
     const secret = process.env.JWT_SECRET;
+
+    // verify: Método da biblioteca jsonwebtoken que valida o token JWT
     jwt.verify(token, secret, (err, user) => {
       if (err) {
         return res.status(403).json({ msg: 'Token inválido!' });
@@ -91,7 +102,12 @@ app.post('/auth/register', async (req, res) => {
 
   try {
     // Criptografar senha
+
+    // O método bcrypt.genSalt() gera um salt (valor aleatório) para ser combinado com a senha, garantindo maior segurança.
     const salt = await bcrypt.genSalt(12);
+
+    //bcrypt.hash(): Cria um hash seguro da senha combinada com o salt gerado
+    // hash da senha (e não a senha em texto puro) é armazenado no banco de dados
     const passwordHash = await bcrypt.hash(password, salt);
 
     // Inserir no banco de dados
@@ -292,7 +308,7 @@ app.delete("/user/delete/:id", checkToken, (req, res) => {
       // Permitir exclusão se for admin de nível 2
       return deleteUser(id, res);
     } else {
-      // Rejeitar exclusão se não for permitido
+
       return res.status(403).json({ msg: "Acesso negado! Você não tem permissão para excluir este usuário." });
     }
   });
@@ -320,18 +336,17 @@ function deleteUser(id, res) {
 // Configurar o diretório estático para a pasta 'frontend'
 app.use(express.static(path.join(__dirname, 'frontend')));
 
-// Nova rota para servir o index.html
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
 });
 
-// Rota pública /home
 app.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, './frontend/home.html'));
 });
 
-// Iniciar o servidor
 
+
+ // 
 app.listen(3002, () => {
   console.log('Servidor rodando na porta 3002');
 });

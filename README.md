@@ -26,6 +26,10 @@ npm install --save-dev nodemon
 
 
 
+ middleware express.json() 
+
+
+
 No projeto, foram criadas rotas públicas e privadas para gerenciar a autenticação de usuários e o acesso a informações sensíveis. As rotas públicas incluem a de registro e login, onde os usuários podem criar uma conta e obter um token JWT após uma autenticação bem-sucedida. Contendo também rotas privadas que são protegidas e exigem um token válido para que os usuários possam acessar informações específicas, como dados do perfil.
 
 Para garantir que os usuários consultem as rotas privadas com um token válido, foi implementado um middleware chamado checkToken. Este middleware intercepta as requisições às rotas privadas e verifica se um token JWT foi fornecido no cabeçalho de autorização. Se a verificação for bem-sucedida, a requisição é permitida e o controle é passado para a próxima função de rota. Caso contrário, a requisição é rejeitada com uma mensagem de erro, garantindo que apenas usuários autenticados possam acessar informações protegidas.
