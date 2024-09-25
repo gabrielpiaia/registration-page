@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="title"><span>Cadastro</span></div>
+        <form id="registerForm">
+            <div class="row">
+                <i class="fas fa-user"></i>
+                <input type="text" name="name" placeholder="Nome Completo" required />
+            </div>
+            <div class="row">
+                <i class="fas fa-envelope"></i>
+                <input type="email" name="email" placeholder="Email" required />
+            </div>
+            <div class="row">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="Senha" required />
+            </div>
+            <div class="row">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="confirmpassword" placeholder="Confirme a Senha" required />
+            </div>
+            <div class="row button">
+                <input type="submit" value="Registrar" />
+            </div>
+            <div class="login-link">Já tem uma conta? <a href="index.html">Fazer Login</a></div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').onsubmit = async function(event) {
+            event.preventDefault();
+
+            const name = document.getElementsByName('name')[0].value;
+            const email = document.getElementsByName('email')[0].value;
+            const password = document.getElementsByName('password')[0].value;
+            const confirmpassword = document.getElementsByName('confirmpassword')[0].value;
+
+            if (password !== confirmpassword) {
+                alert('As senhas não coincidem!');
+                return;
+            }
+
+            try {
+                const response = await fetch('/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, email, password, confirmpassword }),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert(result.msg);
+                    window.location.href = 'index.html'; // Redirecionar para a tela de login após cadastro
+                } else {
+                    alert(result.msg);
+                }
+            } catch (error) {
+                alert('Erro ao tentar registrar. Tente novamente.');
+                console.error(error);
+            }
+        };
+    </script>
+</body>
+</html>

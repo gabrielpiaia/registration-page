@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="title"><span>Login</span></div>
+        <form id="loginForm">
+            <div class="row">
+                <i class="fas fa-user"></i>
+                <input type="text" name="email" placeholder="Email ou Telefone" required />
+            </div>
+            <div class="row">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="Senha" required />
+            </div>
+            <div class="pass"><a href="#">Esqueceu a senha?</a></div>
+            <div class="row button">
+                <input type="submit" value="Login" />
+            </div>
+            <div class="signup-link">Não é membro? <a href="cadastro.html">Fazer Cadastro</a></div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+            
+            const email = this.email.value;
+            const password = this.password.value;
+
+            try {
+                const response = await fetch('/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    localStorage.setItem('token', data.token); // Armazena o token no localStorage
+                    window.location.href = '/home'; // Redireciona para a página home
+                } else {
+                    alert(data.msg || 'Erro ao fazer login.'); // Exibe a mensagem de erro
+                }
+            } catch (error) {
+                console.error('Erro ao fazer login:', error);
+            }
+        });
+    </script>
+</body>
+</html>
