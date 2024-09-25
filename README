@@ -1,3 +1,10 @@
+DEMONSTRAÇÂO:
+
+
+https://www.youtube.com/watch?v=qG9omKpR3CI 
+
+
+
 http://localhost:3002/api-doc/#/
 
 CRIAR .ENV :
@@ -15,8 +22,6 @@ npm install swagger-ui-express swagger-jsdoc
 
 ---------- para ambiente de dev:
 npm install --save-dev nodemon
-
-
 
 
 
