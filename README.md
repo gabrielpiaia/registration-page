@@ -1,6 +1,6 @@
 # Projeto de Autenticação de Usuários com Node.js
 
-Este projeto implementa um sistema de autenticação utilizando Node.js, Express e JSON Web Tokens (JWT). Ele inclui rotas públicas para registro e login de usuários, além de rotas privadas protegidas por tokens JWT. O projeto também utiliza MongoDB e MySQL para armazenar dados dos usuários e garante que as senhas sejam criptografadas com bcrypt.
+Este projeto implementa um sistema de autenticação utilizando Node.js, Express e JSON Web Tokens (JWT). Ele inclui rotas públicas para registro e login de usuários, além de rotas privadas protegidas por tokens JWT. O projeto também utiliza e MySQL para armazenar dados dos usuários e garante que as senhas sejam criptografadas com bcrypt.
 
 ## Demonstração
 
