@@ -54,22 +54,27 @@ npm start
 
 
 
+## Funcionalidades
 
-Funcionalidades
-Registro e Login de Usuários: Usuários podem se registrar e obter um token JWT.
-Proteção de Rotas Privadas: As rotas privadas só podem ser acessadas com um token JWT válido.
-Criptografia de Senhas: As senhas são armazenadas de forma segura utilizando bcrypt.
-Documentação Swagger: Acesse a documentação da API para explorar as rotas.
-Middleware
-express.json(): Utilizado para lidar com dados no formato JSON.
-checkToken: Middleware que verifica se o token JWT fornecido é válido antes de permitir o acesso às rotas privadas.
-Tecnologias Utilizadas
-Express: Framework web para Node.js, utilizado para criar rotas e lidar com requisições.
-MySQL2: Biblioteca para interagir com bancos de dados MySQL, com suporte a Promises e consultas seguras.
-bcrypt: Para hash e verificação de senhas.
-jsonwebtoken: Para gerar e validar tokens JWT, essencial para autenticação de usuários.
-dotenv: Para carregar variáveis de ambiente a partir de um arquivo .env, armazenando informações sensíveis de forma segura.
-Swagger: Ferramenta para gerar e visualizar a documentação da API de forma interativa.
+- **Registro e Login de Usuários**: Usuários podem se registrar e obter um token JWT.
+- **Proteção de Rotas Privadas**: As rotas privadas só podem ser acessadas com um token JWT válido.
+- **Criptografia de Senhas**: As senhas são armazenadas de forma segura utilizando bcrypt.
+- **Documentação Swagger**: Acesse a documentação da API para explorar as rotas.
+
+## Middleware
+
+- **express.json()**: Utilizado para lidar com dados no formato JSON.
+- **checkToken**: Middleware que verifica se o token JWT fornecido é válido antes de permitir o acesso às rotas privadas.
+
+## Tecnologias Utilizadas
+
+- **Express**: Framework web para Node.js, utilizado para criar rotas e lidar com requisições.
+- **MySQL2**: Biblioteca para interagir com bancos de dados MySQL, com suporte a Promises e consultas seguras.
+- **bcrypt**: Para hash e verificação de senhas.
+- **jsonwebtoken**: Para gerar e validar tokens JWT, essencial para autenticação de usuários.
+- **dotenv**: Para carregar variáveis de ambiente a partir de um arquivo `.env`, armazenando informações sensíveis de forma segura.
+- **Swagger**: Ferramenta para gerar e visualizar a documentação da API de forma interativa.
+
 
 
 
