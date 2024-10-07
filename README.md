@@ -1,48 +1,53 @@
-DEMONSTRAÇÂO:
+# Projeto de Autenticação de Usuários com Node.js
 
+Este projeto implementa um sistema de autenticação utilizando Node.js, Express e JSON Web Tokens (JWT). Ele inclui rotas públicas para registro e login de usuários, além de rotas privadas protegidas por tokens JWT. O projeto também utiliza MongoDB e MySQL para armazenar dados dos usuários e garante que as senhas sejam criptografadas com bcrypt.
 
-https://www.youtube.com/watch?v=qG9omKpR3CI
+## Demonstração
 
+- [Vídeo de demonstração](https://www.youtube.com/watch?v=qG9omKpR3CI)
+- [Documentação da API](http://localhost:3002/api-doc/#/)
 
+## Instalação
 
+1. Clone o repositório:
+    ```bash
+    git clone https://github.com/seu-usuario/nome-do-repositorio.git
+    cd nome-do-repositorio
+    ```
 
-http://localhost:3002/api-doc/#/
+2. Crie o arquivo `.env` para armazenar variáveis de ambiente:
+    ```bash
+    touch .env
+    ```
+    Preencha o arquivo `.env` com as seguintes variáveis:
+    ```env
+    DB_HOST=localhost
+    DB_USER=seu-usuario
+    DB_PASS=sua-senha
+    JWT_SECRET=sua-chave-secreta
+    ```
 
-CRIAR .ENV :
+3. Instale as dependências:
+    ```bash
+    npm install
+    ```
 
+    Dependências instaladas:
+    - `bcrypt`: para criptografar senhas.
+    - `dotenv`: para o uso de variáveis de ambiente.
+    - `express`: para criação da API.
+    - `jsonwebtoken`: para gerar e validar tokens JWT.
+    - `mongoose`: para interação com o MongoDB.
+    - `mysql2`: para interação com o banco de dados MySQL.
+    - `swagger-ui-express` e `swagger-jsdoc`: para documentar a API.
 
-npm init -y              criar package.json
-npm install bcrypt       criptografar senhas
-npm install dotenv       ter arquivo de configuração  criar .env
-npm install express      usado para API
-npm install jsonwebtoken      jasonwebtoken
-npm install mongoose     interação com banco mongo
-npm install mysql2
-npm install swagger-ui-express swagger-jsdoc
+4. Para o ambiente de desenvolvimento:
+    ```bash
+    npm install --save-dev nodemon
+    ```
 
+## Execução
 
----------- para ambiente de dev:
-npm install --save-dev nodemon
-
-
-
- middleware express.json() 
-
-
-
-No projeto, foram criadas rotas públicas e privadas para gerenciar a autenticação de usuários e o acesso a informações sensíveis. As rotas públicas incluem a de registro e login, onde os usuários podem criar uma conta e obter um token JWT após uma autenticação bem-sucedida. Contendo também rotas privadas que são protegidas e exigem um token válido para que os usuários possam acessar informações específicas, como dados do perfil.
-
-Para garantir que os usuários consultem as rotas privadas com um token válido, foi implementado um middleware chamado checkToken. Este middleware intercepta as requisições às rotas privadas e verifica se um token JWT foi fornecido no cabeçalho de autorização. Se a verificação for bem-sucedida, a requisição é permitida e o controle é passado para a próxima função de rota. Caso contrário, a requisição é rejeitada com uma mensagem de erro, garantindo que apenas usuários autenticados possam acessar informações protegidas.
-
-Bibliotecas Utilizadas
-express: Um framework web para Node.js que facilita a criação de aplicações e APIs, permitindo gerenciar rotas e manipular requisições de forma eficiente.
-
-mysql2: Uma biblioteca para conectar e interagir com bancos de dados MySQL, oferecendo suporte a Promises e consultas seguras, melhorando a segurança contra injeções de SQL.
-
-bcrypt: Uma biblioteca que fornece funcionalidades para hash e verificação de senhas, garantindo que as senhas sejam armazenadas de forma segura no banco de dados.
-
-jsonwebtoken: Usada para criar e verificar tokens JWT, permitindo a autenticação e autorização de usuários, essencial para a proteção das rotas privadas.
-
-dotenv: Uma biblioteca que carrega variáveis de ambiente a partir de um arquivo .env, permitindo o armazenamento seguro de informações sensíveis, como credenciais e chaves secretas, fora do código-fonte.
-
-Essas bibliotecas juntas formam a base da aplicação, proporcionando uma estrutura segura e escalável para gerenciamento de usuários e autenticação.
+Para rodar o projeto, use o comando abaixo:
+```bash
+npm start
